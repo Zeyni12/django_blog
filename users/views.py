@@ -13,17 +13,18 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.views import LoginView, LogoutView
+from .forms import UserRegisterForm
 
 # ✅ Register view
 def register(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = UserRegisterForm(request.POST)
         if form.is_valid():
             user = form.save()
             login(request, user)
             return redirect('profile')
     else:
-        form = UserCreationForm()
+        form = UserRegisterForm()
     return render(request, 'users/register.html', {'form': form})
 
 # ✅ Profile view
