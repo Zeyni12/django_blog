@@ -13,7 +13,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.views import LoginView, LogoutView
-from .forms import UserRegisterForm
+from .forms import UserRegisterForm , UserUpdateForm,ProfileUpdateForm 
 
 # ✅ Register view
 def register(request):
@@ -30,7 +30,14 @@ def register(request):
 # ✅ Profile view
 @login_required
 def profile(request):
-    return render(request, 'users/profile.html')
+    u_form = UserUpdateForm()
+    p_form = ProfileUpdateForm()
+    context = {
+        'u_form': u_form,
+        'p_form': p_form
+        
+    }
+    return render(request, 'users/profile.html', context)
 
 # ✅ Class-based login and logout
 class LoginView(LoginView):

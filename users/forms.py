@@ -86,6 +86,7 @@ from django.contrib.auth.forms import UserCreationForm
 from .models import Profile
 
 
+
 class UserRegisterForm(UserCreationForm):
     email = forms.EmailField()
 
