@@ -45,7 +45,11 @@ class PostDetailView(DeleteView):
     
 class PostCreateView(CreateView):
     model = Post 
-    fields = ['title', 'content']   
+    fields = ['author','title', 'content' ]
+    
+    def form_valid(self, form):
+        form.instance.author =  self.request.user 
+        return super().form_valid(form)
     
 class PostDeleteView(DeleteView):
     model = Post
