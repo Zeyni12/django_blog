@@ -25,16 +25,16 @@
                 {{ u_form|crispy }}
                 {{ p_form|crispy }}
             </fieldset>
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <button class="btn btn-outline-info" type="submit">Update Profile</button>
-            </div>
+            </div> -->
         </form> 
-      <!-- <p><button id="btn-profile"><a href="#" id="auth-links">
+      <p><button id="btn-profile"><a href="{% url 'profile-update'%}" id="auth-links">
         <span></span>
         <span></span>
         <span></span>
         <span></span>
         Update Profile
     </a></button></p>
-    </div> -->
+    </div>
 {% endblock content %}

@@ -31,28 +31,32 @@ def register(request):
 # ✅ Profile view
 @login_required
 def profile(request):
-    if request.method == 'POST':
-        u_form = UserUpdateForm(request.POST, instance=request.user)
-        p_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
-        if u_form.is_valid() and p_form.is_valid():
-            u_form.save()
-            p_form.save()
-            messages.success(request, f'Your Profile was Updated!!')
-            return redirect('profile')
-    else:
-        u_form = UserUpdateForm(instance=request.user)
-        p_form = ProfileUpdateForm(instance=request.user.profile)
+    return render(request, 'users/profile.html')
+
+def profile_update(request):
+        if request.method == 'POST':
+           u_form = UserUpdateForm(request.POST, instance=request.user)
+           p_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
+           if u_form.is_valid() and p_form.is_valid():
+              u_form.save()
+              p_form.save()
+              messages.success(request, f'Your Profile was Updated!!')
+              return redirect('profile')
+        else:
+           u_form = UserUpdateForm(instance=request.user)
+           p_form = ProfileUpdateForm(instance=request.user.profile)
             
-    context = {
-        'u_form': u_form,
-        'p_form': p_form
+        context = {
+         'u_form': u_form,
+         'p_form': p_form
         
-    }
-    return render(request, 'users/profile.html', context)
+        }
+        return render(request, 'users/profile_update.html', context)
 
-# ✅ Class-based login and logout
-class LoginView(LoginView):
-    template_name = 'users/login.html'
 
-class LogoutView(LogoutView):
-    template_name = 'users/logout.html'
+# # ✅ Class-based login and logout
+# class LoginView(LoginView):
+#     template_name = 'users/login.html'
+
+# class LogoutView(LogoutView):
+#     template_name = 'users/logout.html'
