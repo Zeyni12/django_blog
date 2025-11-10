@@ -8,6 +8,9 @@
             <div class="article-metadata">
                 <a class="mr-2" href="#">{{ object.author }}</a>
                 <small class="text-muted"> {{object.date_posted}}</small>
+                   {% if object.author == user %}
+                   <a class="btn btn-success" href="{% url 'post-update' %}"></a>
+                   {% endif %}
             </div>
             <h2><a class='article-title' href='#'>{{object.title}}</a></h2>
             <p class="article-content">{{ object.content }}</p>
